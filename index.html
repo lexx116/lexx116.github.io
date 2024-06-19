@@ -138,14 +138,19 @@
             width: 60px;
             height: 60px;
             margin-top: 5px;
-            opacity: 1
+            opacity: 0;
+            /* Initially hidden */
+            transition: opacity 1s ease;
+            /* Transition for opacity */
         }
 
         .base-icon {
             width: 700px;
             height: 700px;
             margin-top: 100px;
-       }
+            transition: opacity 1s ease;
+            /* Transition for opacity */
+        }
 
         .text-container {
             text-align: center;
@@ -267,6 +272,18 @@
         </ul>
     </nav>
 
+    <div>
+        <img src="icon/墓後花絮logo@4x.png" class="base-icon" id="baseIcon">
+    </div>
+
+    <div class="text-container">
+        <p><strong>在電影的世界裡，我們見證了無數令人難以忘懷的角色</strong>。</p>
+        <p><strong>他們的故事、他們的冒險，以及他們的犧牲，深深地刻劃</strong></p>
+        <p><strong>在我們的記憶中。</strong></p>
+        <p><strong>為了紀念這些影史上偉大的角色，我們創建了「墓後花絮</strong></p>
+        <p><strong>」網站讓每一位影迷都能在這裡緬懷那些曾經感動我們的</strong></p>
+        <p><strong>銀幕英雄。</strong></p>
+    </div>
 
     <div id="dailyRecommendationSection">
         <img src="icon/PNG/Asset 3234.png" class="point">
@@ -288,20 +305,6 @@
         <img src="icon/PNG/Asset 15234.png" width="1260pt" height="auto">
     </div>
 
-    <div>
-        <img src="icon/墓後花絮logo@4x.png" class="base-icon" id="baseIcon">
-    </div>
-
-    <div class="text-container">
-        <p><strong>在電影的世界裡，我們見證了無數令人難以忘懷的角色</strong>。</p>
-        <p><strong>他們的故事、他們的冒險，以及他們的犧牲，深深地刻劃</strong></p>
-        <p><strong>在我們的記憶中。</strong></p>
-        <p><strong>為了紀念這些影史上偉大的角色，我們創建了「墓後花絮</strong></p>
-        <p><strong>」網站讓每一位影迷都能在這裡緬懷那些曾經感動我們的</strong></p>
-        <p><strong>銀幕英雄。</strong></p>
-    </div>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
@@ -310,6 +313,26 @@
 
     <script>
         feather.replace();
+
+        const baseIcon = document.getElementById('baseIcon');
+        const headerImage = document.getElementById('headerImage');
+        const gradientBar = document.querySelector('.gradient-bar');
+
+        window.addEventListener('scroll', () => {
+            let scrollY = window.scrollY;
+            let windowHeight = window.innerHeight;
+
+            // Adjust opacity based on scroll position for baseIcon
+            let baseOpacity = 1 - (scrollY / windowHeight);
+            baseIcon.style.opacity = baseOpacity;
+
+            // Show/hide headerImage based on baseIcon opacity
+            if (baseOpacity <= 0) {
+                headerImage.style.opacity = 1; // Show headerImage
+            } else {
+                headerImage.style.opacity = 0; // Hide headerImage
+            }
+        });
 
         document.body.addEventListener('mousemove', function (event) {
             const navbar = document.querySelector('.navbar');
@@ -352,26 +375,26 @@
     </script>
 
     <script>
-       document.addEventListener('DOMContentLoaded', function () {
-    const dailyRecommendationLink = document.getElementById('dailyRecommendationLink');
-    const dailyRecommendationSection = document.getElementById('dailyRecommendationSection');
+        document.addEventListener('DOMContentLoaded', function () {
+            const dailyRecommendationLink = document.getElementById('dailyRecommendationLink');
+            const dailyRecommendationSection = document.getElementById('dailyRecommendationSection');
 
-    dailyRecommendationLink.addEventListener('click', function (e) {
-        e.preventDefault(); // 阻止默认点击事件
+            dailyRecommendationLink.addEventListener('click', function (e) {
+                e.preventDefault(); // 阻止默认点击事件
 
-        // 获取目标元素的位置信息
-        const sectionRect = dailyRecommendationSection.getBoundingClientRect();
+                // 获取目标元素的位置信息
+                const sectionRect = dailyRecommendationSection.getBoundingClientRect();
 
-        // 使用window.scrollTo()方法滚动到目标位置
-        window.scrollTo({
-            top: sectionRect.top + window.scrollY, // 计算出实际的顶部位置
-            behavior: 'smooth' // 平滑滚动
+                // 使用window.scrollTo()方法滚动到目标位置
+                window.scrollTo({
+                    top: sectionRect.top + window.scrollY, // 计算出实际的顶部位置
+                    behavior: 'smooth' // 平滑滚动
+                });
+            });
         });
-    });
-});
     </script>
 
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const leftDoor = document.querySelector('.left-door');
             const rightDoor = document.querySelector('.right-door');
