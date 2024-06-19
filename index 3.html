@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墓後花絮</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 這裡是使用的思源宋體 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap');
+
+        p {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* 首先先做頂部與底部navbar */
+        :root {
+            --border-radius: 10px;
+            --spacer: 1rem;
+            --primary: #000000;
+            --text: #ffffff;
+            --link-height: calc(var(--spacer) * 3.5);
+            --timing: 250ms;
+            --transition: var(--timing) ease all;
+        }
+
+        /* 這是整個頁面的底 */
+        body {
+            background: #000000;
+            font-family: 'Open Sans', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            color: var(--text);
+            background-image: url('PNG/rhtdth234.png'); /* 替换为你的PNG图像路径 */
+            background-size: cover; /* 确保图像覆盖整个背景 */
+            background-attachment: fixed; /* 使背景固定不移动 */
+            background-position: center; /* 居中对齐背景图像 */
+            background-repeat: no-repeat; /* 禁止背景图像重复 */
+        }
+
+
+        /* 先做下面navbar的殼 */
+        .gradient-bar {
+            display: flex;
+            width: 100%;
+            height: 80px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 100%);
+            opacity: 1;
+        }
+
+        /* 再做裡面的東西樣式 */
+        .navbar {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            width: 100%;
+            height: 80px;
+            transform: translateX(-50%);
+            background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: var(--border-radius);
+            padding: var(--spacer);
+            transition: bottom 1s ease;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .navbar__item {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin: 0 var(--spacer);
+        }
+
+        .navbar__link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--link-height);
+            width: calc(var(--spacer) * 5.5);
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .navbar__link span {
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            color: #000000;
+            background: #ffffff;
+            padding: calc(var(--spacer) * 0.75);
+            transition: bottom 1s ease;
+            border-radius: calc(var(--border-radius) * 1);
+            writing-mode: horizontal-tb;
+        }
+
+        .navbar__link:hover {
+            color: #ffffff;
+        }
+
+        .navbar__link:hover span,
+        .navbar:not(:hover) .navbar__link:focus span {
+            opacity: 1;
+            transform: translateX(-50%);
+        }
+
+        .navbar__item:hover::before,
+        .navbar__item:focus::before {
+            opacity: 1;
+        }
+
+        .navbar__link i {
+            transition: transform 1s ease-in-out;
+        }
+
+        .header-image {
+            width: 60px;
+            height: 60px;
+            margin-top: 5px;
+            opacity: 1;
+        }
+
+        .base-icon {
+            width: 700px;
+            height: 700px;
+            margin-top: 100px;
+            transition: opacity 1s ease;
+            /* Transition for opacity */
+        }
+
+        .title-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60pt;
+        }
+
+        .title {
+            width: 100%;
+            height: auto;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding-top: 20px;
+        }
+
+        .gallery-container {
+            width: 80%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-container a {
+            display: block;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-container a img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-container a:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        .door {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: 50vw;
+            overflow: hidden;
+            transition: transform 1s ease;
+            /* 过渡效果 */
+            z-index: 1004;
+        }
+
+        .left-door {
+            left: 0;
+            transform-origin: left center;
+        }
+
+        .right-door {
+            right: 0;
+            transform-origin: right center;
+        }
+
+        .door img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1004;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .character-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 960px;
+            height: 540px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #fff;
+            border-radius: 10px;
+            z-index: 1005;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .character-modal img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .character-modal.show {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="door left-door">
+        <img src="PNG/252234.png">
+    </div>
+
+    <div class="door right-door">
+        <img src="PNG/455234.png">
+    </div>
+
+    <div class="gradient-bar">
+        <div>
+            <a href="index 1.html" id="scrollToTop">
+                <img src="icon/墓後花絮logo@4x.png" alt="Header Image" class="header-image" id="headerImage">
+            </a>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="index 1.html" class="navbar__link navbar__home"><i data-feather="home"></i><span>主頁</span></a>
+            </li>
+            <li class="navbar__item">
+                <a href="index 2.html" class="navbar__link navbar__daily"><i data-feather="thumbs-up"></i><span>每日一推</span></a>
+            </li>
+            <li class="navbar__item">
+                <a href="index 3.html" class="navbar__link navbar__gallery"><i data-feather="book-open"></i><span>影靈殿</span></a>
+            </li>
+            <li class="navbar__item">
+                <a href="index 4.html" class="navbar__link navbar__mailbox"><i data-feather="send"></i><span>弔念郵箱</span></a>
+            </li>
+            <li class="navbar__item">
+                <a href="index 5.html" class="navbar__link navbar__shrine"><i data-feather="heart"></i><span>上香專區</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="title-container">
+        <img src="PNG/skrtyl1111.png" class="title" alt="Title">
+    </div>
+
+    <div class="content-container">
+        <div class="gallery-container">
+            <a href="#" class="character-image" data-image="CharacterDoc/資料1.png">
+                <img src="CharactorPic/PNG/Asset 51111.png" alt="角色1">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料2.png">
+                <img src="CharactorPic/PNG/Asset 61111.png" alt="角色2">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料3.png">
+                <img src="CharactorPic/PNG/Asset 71111.png" alt="角色3">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料4.png">
+                <img src="CharactorPic/PNG/Asset 81111.png" alt="角色4">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料5.png">
+                <img src="CharactorPic/PNG/Asset 91111.png" alt="角色5">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料6.png">
+                <img src="CharactorPic/PNG/Asset 101111.png" alt="角色6">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料7.png">
+                <img src="CharactorPic/PNG/Asset 111111.png" alt="角色7">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料8.png">
+                <img src="CharactorPic/PNG/Asset 121111.png" alt="角色8">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料9.png">
+                <img src="CharactorPic/PNG/Asset 131111.png" alt="角色9">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料10.png">
+                <img src="CharactorPic/PNG/Asset 141111.png" alt="角色10">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料11.png">
+                <img src="CharactorPic/PNG/Asset 151111.png" alt="角色11">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料12.png">
+                <img src="CharactorPic/PNG/Asset 161111.png" alt="角色12">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料13.png">
+                <img src="CharactorPic/PNG/Asset 171111.png" alt="角色13">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料14.png">
+                <img src="CharactorPic/PNG/Asset 181111.png" alt="角色14">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料15.png">
+                <img src="CharactorPic/PNG/Asset 191111.png" alt="角色15">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料16.png">
+                <img src="CharactorPic/PNG/Asset 201111.png" alt="角色16">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料17.png">
+                <img src="CharactorPic/PNG/Asset 211111.png" alt="角色17">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料18.png">
+                <img src="CharactorPic/PNG/Asset 221111.png" alt="角色18">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料19.png">
+                <img src="CharactorPic/PNG/Asset 231111.png" alt="角色19">
+            </a>
+            <a href="#" class="character-image" data-image="CharacterDoc/資料20.png">
+                <img src="CharactorPic/PNG/Asset 241111.png" alt="角色20">
+            </a>
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+    <div class="character-modal">
+        <span class="close-btn">&times;</span>
+        <img src="" alt="Character Image">
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        feather.replace();
+
+        const baseIcon = document.getElementById('baseIcon');
+        const headerImage = document.getElementById('headerImage');
+        const gradientBar = document.querySelector('.gradient-bar');
+
+        document.body.addEventListener('mousemove', function (event) {
+            const navbar = document.querySelector('.navbar');
+            const threshold = 150; // Distance from the bottom edge to trigger the navbar
+
+            if (window.innerHeight - event.clientY < threshold) {
+                navbar.style.bottom = '0'; // Slide in
+            } else {
+                navbar.style.bottom = '-100px'; // Slide out
+            }
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const leftDoor = document.querySelector('.left-door');
+        const rightDoor = document.querySelector('.right-door');
+        const doors = [leftDoor, rightDoor];
+
+        // Open doors initially
+        doors.forEach(door => {
+            setTimeout(() => {
+                leftDoor.style.transform = 'translateX(-100%)';
+                rightDoor.style.transform = 'translateX(100%)';
+            }, 500); // Delay for visual effect
+        });
+
+        // Delayed transition to next page
+        document.querySelectorAll('.navbar__link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Close doors with animation
+                doors.forEach(door => {
+                    door.style.transform = 'translateX(0)';
+                });
+
+                // Delay redirect to next page
+                setTimeout(() => {
+                    window.location.href = this.href; // Redirect to clicked link
+                }, 1500); // Wait for animation to complete
+            });
+        });
+
+        // Disable door animation on modal open
+        document.querySelectorAll('.navbar__link').forEach(link => {
+            if (link.classList.contains('navbar__gallery')) {
+                link.addEventListener('click', function(event) {
+                    leftDoor.style.transition = 'none'; // Disable transition
+                    rightDoor.style.transition = 'none'; // Disable transition
+                });
+            }
+        });
+    });
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-B4gt1jrGC7Jh4g1Fu6ZNHrw5NqgRTKSb7mtVSLZYSKp6lBiLAmx4/f3uM3g5p3t4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9bRZI5A2mFfRK7Ah4gkTV4lQczB8eA7j6c12C6MX6FQ5rGz6LdAcFMi" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const characterLinks = document.querySelectorAll('.character-image');
+        const characterModal = document.querySelector('.character-modal');
+        const characterModalImg = characterModal.querySelector('img');
+        const overlay = document.querySelector('.overlay');
+        const closeBtn = document.querySelector('.close-btn');
+
+        characterLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const imgSrc = this.getAttribute('data-image');
+                characterModalImg.src = imgSrc;
+                characterModal.classList.add('show');
+                overlay.classList.add('show');
+            });
+        });
+
+        overlay.addEventListener('click', function () {
+            characterModal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+        closeBtn.addEventListener('click', function () {
+            characterModal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    });
+</script>
+
+
+</body>
+</html>
